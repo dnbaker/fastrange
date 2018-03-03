@@ -85,4 +85,23 @@ static inline int fastrangeint(int word, int p) {
 #endif // (SIZE_MAX == UINT32_MAX)
 }
 
+#ifdef __cplusplus
+template<typename T>
+static inline T fastrange(T word, T p) {
+    return fastrange64(static_cast<uint64_t>(word), static_cast<uint64_t>(p));
+}
+template<>
+inline uint64_t fastrange(uint64_t word, uint64_t p) {
+    return fastrange64(word, p);
+}
+template<>
+inline uint32_t fastrange(uint32_t word, uint32_t p) {
+    return fastrange32(word, p);
+}
+template<>
+inline int fastrange(int word, int p) {
+    return fastrangeint(word, p);
+}
+#endif
+
 #endif// INCLUDE_FASTRANGE_H
